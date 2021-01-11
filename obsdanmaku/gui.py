@@ -1,3 +1,5 @@
+import math
+
 from OpenGL.GL import *
 import glfw
 
@@ -23,13 +25,26 @@ class Window:
         self._window = window
 
     def start(self):
+        t = 0
         while not glfw.window_should_close(self._window):
             glClearColor(1, 1, 1, 1)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
+            tt = t*2*math.pi / 60 / 60
+            td = 2*math.pi/3
+            glBegin(GL_TRIANGLES)
+            glColor3d(1, 0, 0)
+            glVertex2d(math.cos(tt), math.sin(tt))
+            glColor3d(0, 1, 0)
+            glVertex2d(math.cos(tt+td), math.sin(tt+td))
+            glColor3d(0, 0, 1)
+            glVertex2d(math.cos(tt+td*2), math.sin(tt+td*2))
+            glEnd()
+
             glfw.swap_buffers(self._window)
 
             glfw.poll_events()
+            t += 1
 
         glfw.destroy_window(self._window)
         glfw.terminate()
