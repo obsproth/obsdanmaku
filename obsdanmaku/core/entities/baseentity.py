@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 
 class BaseEntity:
@@ -7,3 +9,7 @@ class BaseEntity:
         self.v = v
         self.angle = angle
         self.size = size
+
+    def tick(self):
+        self.pos[0] += self.v * math.cos(self.angle)
+        self.pos[1] += self.v * math.sin(self.angle)

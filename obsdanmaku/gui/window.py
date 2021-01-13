@@ -33,24 +33,23 @@ class Window:
         self.engine = engine
 
     def start(self):
-        t = 0
         while not glfw.window_should_close(self._window):
             glClearColor(1, 1, 1, 1)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+            self.engine.tick()
             self._render_all()
 
             glfw.swap_buffers(self._window)
 
             glfw.poll_events()
-            t += 1
 
         glfw.destroy_window(self._window)
         glfw.terminate()
 
     def _render_all(self):
-        self._render_entity(self.engine.player)
-        for bullet in self.engine.bullets:
-            self._render_entity(bullet)
+        for entity in self.engine.entities:
+            self._render_entity(entity)
 
     def _render_entity(self, entity: BaseEntity):
         center_pos = entity.pos

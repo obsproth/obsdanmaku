@@ -8,10 +8,12 @@ class Engine:
 
     def __init__(self):
         self.size = np.array([540, 720], dtype=float)
-        self.player = PlayerEntity()
-        self.bullets = []
+        self.player = PlayerEntity(v=1)
+        self.entities = [self.player]
+        self.tick_counter = 0
 
-    def add_bullet(self, bullet: BulletEntity):
-        self.bullets.append(bullet)
-
+    def tick(self):
+        for entity in self.entities:
+            entity.tick()
+        self.tick_counter += 1
 
