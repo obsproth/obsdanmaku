@@ -1,1 +1,1 @@
-# obsdanmaku
+# danmakepy
